@@ -45,6 +45,7 @@
 		"@types/node": "^22.15.18",
 		"@types/react": "^19.2.0",
 		"@types/react-dom": "^19.2.0",
+		"@unocss/preset-web-fonts": "^66.5.2",
 		"@vitejs/plugin-react": "^5.0.4",
 		"eslint": "^9.26.0",
 		"hot-hook": "^0.4.0",
@@ -53,6 +54,7 @@
 		"release-it": "^19.0.5",
 		"ts-node-maintained": "^10.9.5",
 		"typescript": "~5.8.3",
+		"unocss": "^66.5.2",
 		"vite": "^6.3.5"
 	},
 	"dependencies": {
