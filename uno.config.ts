@@ -1,10 +1,10 @@
 import presetWebFonts from '@unocss/preset-web-fonts';
-import { defineConfig, presetWind4 } from 'unocss';
+import { defineConfig, presetWind4, transformerDirectives } from 'unocss';
 
 export default defineConfig({
 	presets: [
 		presetWind4({
-			dark: 'class', // Active le mode sombre avec la classe 'dark'
+			dark: 'class',
 		}),
 		presetWebFonts({
 			provider: 'bunny',
@@ -13,9 +13,8 @@ export default defineConfig({
 			},
 		}),
 	],
+	transformers: [transformerDirectives()],
 	theme: {
-		colors: {
-			// Couleurs personnalisées si nécessaire
-		},
+		colors: {},
 	},
 });

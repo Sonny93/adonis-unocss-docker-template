@@ -8,3 +8,85 @@ body {
 	height: 100%;
 	width: 100%;
 }
+
+.button {
+	@apply cursor-pointer px-4 py-2 text-sm font-medium rounded-lg transition text-black dark:text-white border border-gray-200 dark:border-slate-700;
+}
+
+.button-primary {
+	@apply cursor-pointer px-4 py-2 text-sm font-medium rounded-lg transition bg-emerald-600 hover:bg-emerald-500 text-white;
+}
+
+.button-secondary {
+	@apply cursor-pointer px-4 py-2 text-sm font-medium rounded-lg transition bg-slate-700 hover:bg-slate-600 text-slate-300;
+}
+
+.input {
+	@apply w-full px-4 py-3 bg-gray-100 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-black dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition;
+}
+.input-error {
+	@apply mt-2 text-sm text-red-400;
+}
+
+.backdrop {
+	@apply bg-gray-900/10 dark:bg-gray-900/30;
+	-webkit-backdrop-filter: blur(4px);
+	opacity: 0;
+	transition-property: opacity, backdrop-filter;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	backdrop-filter: blur(0);
+}
+
+.dialog {
+	@apply bg-white dark:bg-slate-800 dark:border dark:border-slate-700 text-black dark:text-white;
+	position: fixed;
+	inset: var(--inset);
+	z-index: 50;
+	margin: auto;
+	display: flex;
+	height: fit-content;
+	max-height: calc(100dvh - var(--inset) * 2);
+	flex-direction: column;
+	gap: 1rem;
+	overflow: auto;
+	border-radius: 0.75rem;
+	padding: 1rem;
+	box-shadow: 0 25px 50px -12px rgb(17 24 39 / 0.25);
+	--inset: 0.75rem;
+	transform-origin: center;
+	opacity: 0;
+	transition-property: opacity, transform;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: 150ms;
+	transform: scale(0.95);
+}
+
+@media (min-width: 640px) {
+	.dialog {
+		top: 10vh;
+		bottom: 10vh;
+		margin-top: 0px;
+		max-height: 80vh;
+		width: 420px;
+		border-radius: 1rem;
+		padding: 1.5rem;
+	}
+}
+
+.heading {
+	margin: 0px;
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	font-weight: 600;
+}
+
+.backdrop[data-enter] {
+	opacity: 1;
+	backdrop-filter: blur(4px);
+}
+
+.dialog[data-enter] {
+	opacity: 1;
+	transform: scale(1);
+}

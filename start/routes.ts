@@ -3,6 +3,7 @@ import router from '@adonisjs/core/services/router';
 
 const AuthController = () => import('#controllers/auth_controller');
 const HomeController = () => import('#controllers/home_controller');
+const BotsController = () => import('#controllers/bots_controller');
 
 router
 	.group(() => {
@@ -17,5 +18,9 @@ router
 	.group(() => {
 		router.get('/', [HomeController, 'index']);
 		router.get('/logout', [AuthController, 'logout']);
+
+		router.post('/bots', [BotsController, 'create']);
+		router.put('/bots/:id', [BotsController, 'update']);
+		router.delete('/bots/:id', [BotsController, 'destroy']);
 	})
 	.use(middleware.auth());

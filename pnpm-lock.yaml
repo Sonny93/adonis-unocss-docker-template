@@ -34,12 +34,18 @@ importers:
       '@adonisjs/vite':
         specifier: ^4.0.0
         version: 4.0.0(@adonisjs/core@6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0))(@adonisjs/shield@8.2.0(@adonisjs/core@6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0))(@adonisjs/session@7.5.1(@adonisjs/core@6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0))(edge.js@6.3.0))(edge.js@6.3.0))(edge.js@6.3.0)(vite@7.2.2(@types/node@24.10.0)(jiti@2.6.1))
+      '@ariakit/react':
+        specifier: ^0.4.20
+        version: 0.4.20(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@inertiajs/react':
         specifier: ^2.2.15
         version: 2.2.15(react@19.2.0)
       '@vinejs/vine':
         specifier: ^4.1.0
         version: 4.1.0
+      adonisjs-websocket:
+        specifier: ^0.2.3
+        version: 0.2.3(@adonisjs/core@6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0))(@adonisjs/http-server@7.7.0(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/encryption@6.0.2)(@adonisjs/events@9.0.2(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0)(@adonisjs/logger@6.0.6))
       edge.js:
         specifier: ^6.3.0
         version: 6.3.0
@@ -79,7 +85,7 @@ importers:
         version: 4.4.0
       '@swc/core':
         specifier: 1.15.0
-        version: 1.15.0
+        version: 1.15.0(@swc/helpers@0.5.17)
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1
@@ -115,7 +121,7 @@ importers:
         version: 19.0.6(@types/node@24.10.0)
       ts-node-maintained:
         specifier: ^10.9.6
-        version: 10.9.6(@swc/core@1.15.0)(@types/node@24.10.0)(typescript@5.9.3)
+        version: 10.9.6(@swc/core@1.15.0(@swc/helpers@0.5.17))(@types/node@24.10.0)(typescript@5.9.3)
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -470,6 +476,30 @@ packages:
       {
         integrity: sha512-TMilPqXyii1AsiEii6l6ubRzbo76p6oshUSYPaKsmXDavyMLqjzVDkcp3pHp5ELMUNJHATcEOGxKTTsX9yYhGg==,
       }
+
+  '@ariakit/core@0.4.17':
+    resolution:
+      {
+        integrity: sha512-OmbUcVZgmQw0AvpX5urCAi3KtEuD30DG8W8gpQVzFpCUWUtJ21bmc6a4s2rm2g1oKPIVShy61FGLtKdKLaTG6g==,
+      }
+
+  '@ariakit/react-core@0.4.20':
+    resolution:
+      {
+        integrity: sha512-4rfmaKgSIctHRDrA4wt8MLSI4rNA6wyD7XSTShghHrJfDEXujuOoZqvmPjtMr///kWfW9OV9USOOn8ie/7H/nw==,
+      }
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@ariakit/react@0.4.20':
+    resolution:
+      {
+        integrity: sha512-1X44x3co7MInk5SV4lSvRdy8Nwrt56YNBreKPkcZ/LlwdmY2/2r4A26I7Kzhv+VYIxDTavZYrqOlWnix5ojceg==,
+      }
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@arr/every@1.0.1':
     resolution:
@@ -973,6 +1003,24 @@ packages:
       }
     engines: { node: '>=18.0.0', npm: '>=9.0.0' }
 
+  '@floating-ui/core@1.7.3':
+    resolution:
+      {
+        integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==,
+      }
+
+  '@floating-ui/dom@1.7.4':
+    resolution:
+      {
+        integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==,
+      }
+
+  '@floating-ui/utils@0.2.10':
+    resolution:
+      {
+        integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==,
+      }
+
   '@humanfs/core@0.19.1':
     resolution:
       {
@@ -1208,6 +1256,12 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
+
+  '@ioredis/commands@1.4.0':
+    resolution:
+      {
+        integrity: sha512-aFT2yemJJo+TZCmieA7qnYGQooOS7QfNmYrzGtsYd3g9j5iDP8AimYYAesf79ohjbLG12XxC4nG5DyEnC88AsQ==,
+      }
 
   '@japa/assert@4.1.1':
     resolution:
@@ -1955,6 +2009,12 @@ packages:
         integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==,
       }
 
+  '@swc/helpers@0.5.17':
+    resolution:
+      {
+        integrity: sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A==,
+      }
+
   '@swc/types@0.1.25':
     resolution:
       {
@@ -2149,6 +2209,12 @@ packages:
     resolution:
       {
         integrity: sha512-7bcUmDyS6PN3EuD9SlGGOxM77F8WLVsrwkxyWxKnxzmXoequ6c7741QBrANq6htVRGOITJ7z72mTP6Z4XyuG+Q==,
+      }
+
+  '@types/ws@8.18.1':
+    resolution:
+      {
+        integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==,
       }
 
   '@typescript-eslint/eslint-plugin@8.45.0':
@@ -2464,6 +2530,16 @@ packages:
       }
     engines: { node: '>=0.4.0' }
     hasBin: true
+
+  adonisjs-websocket@0.2.3:
+    resolution:
+      {
+        integrity: sha512-AD0PYcEdop+ePSuccTt6lnlI9187oJgNueC14wGDqaCbuRHlce19C8QOZqWBwpG9bR7vKkXl2I1bGRqNKQ/m/w==,
+      }
+    engines: { node: '>=20.6.0' }
+    peerDependencies:
+      '@adonisjs/core': ^6.2.0
+      '@adonisjs/http-server': ^7.0.2
 
   agent-base@7.1.4:
     resolution:
@@ -2874,6 +2950,13 @@ packages:
       }
     engines: { node: '>= 12' }
 
+  cluster-key-slot@1.1.2:
+    resolution:
+      {
+        integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==,
+      }
+    engines: { node: '>=0.10.0' }
+
   code-block-writer@13.0.3:
     resolution:
       {
@@ -3168,6 +3251,13 @@ packages:
         integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==,
       }
     engines: { node: '>=0.4.0' }
+
+  denque@2.1.0:
+    resolution:
+      {
+        integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==,
+      }
+    engines: { node: '>=0.10' }
 
   depd@2.0.0:
     resolution:
@@ -4132,6 +4222,13 @@ packages:
       }
     engines: { node: '>= 0.10' }
 
+  ioredis@5.8.2:
+    resolution:
+      {
+        integrity: sha512-C6uC+kleiIMmjViJINWk80sOQw5lEzse1ZmvD+S/s8p8CWapftSaC+kocGTx6xrbrJ4WmYQGC08ffHLr6ToR6Q==,
+      }
+    engines: { node: '>=12.22.0' }
+
   ip-address@10.0.1:
     resolution:
       {
@@ -4471,10 +4568,22 @@ packages:
         integrity: sha512-kZzYOKspf8XVX5AvmQF94gQW0lejFVgb80G85bU4ZWzoJ6C03PQg3coYAUpSTpQWelrZELd3XWgHzw4Ck5kaIw==,
       }
 
+  lodash.defaults@4.2.0:
+    resolution:
+      {
+        integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==,
+      }
+
   lodash.escaperegexp@4.1.2:
     resolution:
       {
         integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==,
+      }
+
+  lodash.isarguments@3.1.0:
+    resolution:
+      {
+        integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==,
       }
 
   lodash.isplainobject@4.0.6:
@@ -5500,6 +5609,20 @@ packages:
       }
     engines: { node: '>= 10.13.0' }
 
+  redis-errors@1.2.0:
+    resolution:
+      {
+        integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==,
+      }
+    engines: { node: '>=4' }
+
+  redis-parser@3.0.0:
+    resolution:
+      {
+        integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==,
+      }
+    engines: { node: '>=4' }
+
   reflect-metadata@0.2.2:
     resolution:
       {
@@ -5862,6 +5985,12 @@ packages:
     resolution:
       {
         integrity: sha512-Kpij9riA+UNg7TnphqjH7/CzctQ/owJGNbFkfEeve4Z4uxT5+JapVLFXcsurIfN34gnTWZNJ/f7NMG0E8JDzTw==,
+      }
+
+  standard-as-callback@2.1.0:
+    resolution:
+      {
+        integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==,
       }
 
   statuses@2.0.1:
@@ -6298,6 +6427,14 @@ packages:
       }
     engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
 
+  use-sync-external-store@1.6.0:
+    resolution:
+      {
+        integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==,
+      }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   v8-compile-cache-lib@3.0.1:
     resolution:
       {
@@ -6434,6 +6571,21 @@ packages:
       {
         integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==,
       }
+
+  ws@8.18.3:
+    resolution:
+      {
+        integrity: sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==,
+      }
+    engines: { node: '>=10.0.0' }
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   wsl-utils@0.1.0:
     resolution:
@@ -6842,6 +6994,22 @@ snapshots:
 
   '@antfu/utils@9.2.1': {}
 
+  '@ariakit/core@0.4.17': {}
+
+  '@ariakit/react-core@0.4.20(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@ariakit/core': 0.4.17
+      '@floating-ui/dom': 1.7.4
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+      use-sync-external-store: 1.6.0(react@19.2.0)
+
+  '@ariakit/react@0.4.20(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@ariakit/react-core': 0.4.20(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
   '@arr/every@1.0.1': {}
 
   '@babel/code-frame@7.27.1':
@@ -7116,6 +7284,17 @@ snapshots:
 
   '@faker-js/faker@9.9.0': {}
 
+  '@floating-ui/core@1.7.3':
+    dependencies:
+      '@floating-ui/utils': 0.2.10
+
+  '@floating-ui/dom@1.7.4':
+    dependencies:
+      '@floating-ui/core': 1.7.3
+      '@floating-ui/utils': 0.2.10
+
+  '@floating-ui/utils@0.2.10': {}
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.7':
@@ -7284,6 +7463,8 @@ snapshots:
   '@inquirer/type@3.0.8(@types/node@24.10.0)':
     optionalDependencies:
       '@types/node': 24.10.0
+
+  '@ioredis/commands@1.4.0': {}
 
   '@japa/assert@4.1.1(@japa/runner@4.4.0)':
     dependencies:
@@ -7682,7 +7863,7 @@ snapshots:
   '@swc/core-win32-x64-msvc@1.15.0':
     optional: true
 
-  '@swc/core@1.15.0':
+  '@swc/core@1.15.0(@swc/helpers@0.5.17)':
     dependencies:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.25
@@ -7697,8 +7878,14 @@ snapshots:
       '@swc/core-win32-arm64-msvc': 1.15.0
       '@swc/core-win32-ia32-msvc': 1.15.0
       '@swc/core-win32-x64-msvc': 1.15.0
+      '@swc/helpers': 0.5.17
 
   '@swc/counter@0.1.3': {}
+
+  '@swc/helpers@0.5.17':
+    dependencies:
+      tslib: 2.8.1
+    optional: true
 
   '@swc/types@0.1.25':
     dependencies:
@@ -7803,6 +7990,10 @@ snapshots:
       csstype: 3.1.3
 
   '@types/validator@13.15.3': {}
+
+  '@types/ws@8.18.1':
+    dependencies:
+      '@types/node': 24.10.0
 
   '@typescript-eslint/eslint-plugin@8.45.0(@typescript-eslint/parser@8.45.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)':
     dependencies:
@@ -8096,6 +8287,18 @@ snapshots:
 
   acorn@8.15.0: {}
 
+  adonisjs-websocket@0.2.3(@adonisjs/core@6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0))(@adonisjs/http-server@7.7.0(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/encryption@6.0.2)(@adonisjs/events@9.0.2(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0)(@adonisjs/logger@6.0.6)):
+    dependencies:
+      '@adonisjs/core': 6.19.1(@adonisjs/assembler@7.8.2(typescript@5.9.3))(@vinejs/vine@4.1.0)(edge.js@6.3.0)
+      '@adonisjs/http-server': 7.7.0(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/encryption@6.0.2)(@adonisjs/events@9.0.2(@adonisjs/application@8.4.2(@adonisjs/config@5.0.3)(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0))(@adonisjs/fold@10.2.0)(@adonisjs/logger@6.0.6)
+      '@types/ws': 8.18.1
+      ioredis: 5.8.2
+      ws: 8.18.3
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   agent-base@7.1.4: {}
 
   ajv@6.12.6:
@@ -8310,6 +8513,8 @@ snapshots:
 
   cli-width@4.1.0: {}
 
+  cluster-key-slot@1.1.2: {}
+
   code-block-writer@13.0.3: {}
 
   color-convert@2.0.1:
@@ -8435,6 +8640,8 @@ snapshots:
       esprima: 4.0.1
 
   delayed-stream@1.0.0: {}
+
+  denque@2.1.0: {}
 
   depd@2.0.0: {}
 
@@ -9015,6 +9222,20 @@ snapshots:
 
   interpret@2.2.0: {}
 
+  ioredis@5.8.2:
+    dependencies:
+      '@ioredis/commands': 1.4.0
+      cluster-key-slot: 1.1.2
+      debug: 4.4.3
+      denque: 2.1.0
+      lodash.defaults: 4.2.0
+      lodash.isarguments: 3.1.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   ip-address@10.0.1: {}
 
   ipaddr.js@1.9.1: {}
@@ -9180,7 +9401,11 @@ snapshots:
 
   lodash.capitalize@4.2.1: {}
 
+  lodash.defaults@4.2.0: {}
+
   lodash.escaperegexp@4.1.2: {}
+
+  lodash.isarguments@3.1.0: {}
 
   lodash.isplainobject@4.0.6: {}
 
@@ -9728,6 +9953,12 @@ snapshots:
     dependencies:
       resolve: 1.22.10
 
+  redis-errors@1.2.0: {}
+
+  redis-parser@3.0.0:
+    dependencies:
+      redis-errors: 1.2.0
+
   reflect-metadata@0.2.2: {}
 
   regexp-tree@0.1.27: {}
@@ -9977,6 +10208,8 @@ snapshots:
       as-table: 1.0.55
       get-source: 2.0.12
 
+  standard-as-callback@2.1.0: {}
+
   statuses@2.0.1: {}
 
   stdin-discarder@0.2.2: {}
@@ -10088,7 +10321,7 @@ snapshots:
       '@ts-morph/common': 0.24.0
       code-block-writer: 13.0.3
 
-  ts-node-maintained@10.9.6(@swc/core@1.15.0)(@types/node@24.10.0)(typescript@5.9.3):
+  ts-node-maintained@10.9.6(@swc/core@1.15.0(@swc/helpers@0.5.17))(@types/node@24.10.0)(typescript@5.9.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
@@ -10106,7 +10339,7 @@ snapshots:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     optionalDependencies:
-      '@swc/core': 1.15.0
+      '@swc/core': 1.15.0(@swc/helpers@0.5.17)
 
   tslib@2.8.1: {}
 
@@ -10212,6 +10445,10 @@ snapshots:
 
   url-join@5.0.0: {}
 
+  use-sync-external-store@1.6.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+
   v8-compile-cache-lib@3.0.1: {}
 
   validate-npm-package-license@3.0.4:
@@ -10270,6 +10507,8 @@ snapshots:
       strip-ansi: 7.1.2
 
   wrappy@1.0.2: {}
+
+  ws@8.18.3: {}
 
   wsl-utils@0.1.0:
     dependencies:

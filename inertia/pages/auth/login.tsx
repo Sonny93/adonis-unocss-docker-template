@@ -15,62 +15,60 @@ const Login = () => {
 	return (
 		<>
 			<Head title="Login" />
-			<div className="min-h-screen flex items-center justify-center bg-slate-900">
-				<div className="w-full max-w-md p-8 bg-slate-800 rounded-2xl shadow-2xl">
-					<h1 className="text-3xl font-bold text-white mb-8 text-center">
-						Connexion
-					</h1>
+			<div className="w-full max-w-md mx-auto mt-25 p-8 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl">
+				<h1 className="text-3xl font-bold text-black dark:text-white mb-8 text-center">
+					Connexion
+				</h1>
 
-					<form onSubmit={handleSubmit} className="space-y-6">
-						<div>
-							<label
-								htmlFor="email"
-								className="block text-sm font-medium text-slate-300 mb-2"
-							>
-								Email
-							</label>
-							<input
-								id="email"
-								type="email"
-								value={data.email}
-								onChange={(e) => setData('email', e.target.value)}
-								className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-								placeholder="email@example.com"
-							/>
-							{errors.email && (
-								<p className="mt-2 text-sm text-red-400">{errors.email}</p>
-							)}
-						</div>
-
-						<div>
-							<label
-								htmlFor="password"
-								className="block text-sm font-medium text-slate-300 mb-2"
-							>
-								Mot de passe
-							</label>
-							<input
-								id="password"
-								type="password"
-								value={data.password}
-								onChange={(e) => setData('password', e.target.value)}
-								className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-								placeholder="••••••••"
-							/>
-							{errors.password && (
-								<p className="mt-2 text-sm text-red-400">{errors.password}</p>
-							)}
-						</div>
-
-						<button
-							type="submit"
-							disabled={processing}
-							className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors duration-200"
+				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+					<div>
+						<label
+							htmlFor="email"
+							className="block text-sm font-medium text-slate-500 dark:text-slate-500 mb-2"
 						>
-							{processing ? 'Connexion...' : 'Se connecter'}
-						</button>
-					</form>
-				</div>
+							Email
+						</label>
+						<input
+							id="email"
+							type="email"
+							value={data.email}
+							onChange={(e) => setData('email', e.target.value)}
+							className="input"
+							placeholder="email@example.com"
+							autoComplete="email"
+						/>
+						{errors.email && <p className="input-error">{errors.email}</p>}
+					</div>
+
+					<div>
+						<label
+							htmlFor="password"
+							className="block text-sm font-medium text-slate-500 dark:text-slate-500 mb-2"
+						>
+							Mot de passe
+						</label>
+						<input
+							id="password"
+							type="password"
+							value={data.password}
+							onChange={(e) => setData('password', e.target.value)}
+							className="input"
+							placeholder="••••••••"
+							autoComplete="current-password"
+						/>
+						{errors.password && (
+							<p className="input-error">{errors.password}</p>
+						)}
+					</div>
+
+					<button
+						type="submit"
+						disabled={processing}
+						className="button-primary"
+					>
+						{processing ? 'Connexion...' : 'Se connecter'}
+					</button>
+				</form>
 			</div>
 		</>
 	);
