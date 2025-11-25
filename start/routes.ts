@@ -2,6 +2,7 @@ import { middleware } from '#start/kernel';
 import router from '@adonisjs/core/services/router';
 
 const AuthController = () => import('#controllers/auth_controller');
+const HomeController = () => import('#controllers/home_controller');
 
 router
 	.group(() => {
@@ -14,7 +15,7 @@ router
 
 router
 	.group(() => {
-		router.on('/').renderInertia('home');
+		router.get('/', [HomeController, 'index']);
 		router.get('/logout', [AuthController, 'logout']);
 	})
 	.use(middleware.auth());

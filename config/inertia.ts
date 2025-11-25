@@ -1,3 +1,4 @@
+import { UserAuthDto } from '#dtos/user_auth';
 import { defineConfig } from '@adonisjs/inertia';
 import type { InferSharedProps } from '@adonisjs/inertia/types';
 
@@ -11,7 +12,11 @@ const inertiaConfig = defineConfig({
 	 * Data that should be shared with all rendered pages
 	 */
 	sharedData: {
-		// user: (ctx) => ctx.inertia.always(() => ctx.auth.user),
+		auth: (ctx) =>
+			ctx.inertia.always(async () => {
+				await ctx.auth?.check();
+				return new UserAuthDto(ctx.auth?.user).serialize();
+			}),
 	},
 
 	/**
