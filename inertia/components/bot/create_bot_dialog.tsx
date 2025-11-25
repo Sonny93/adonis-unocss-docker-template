@@ -12,7 +12,6 @@ export function CreateBotDialog() {
 
 	const { data, setData, post, processing, errors, reset } = useForm({
 		username: '',
-		gameVersion: '1.21.8',
 	});
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,14 +27,14 @@ export function CreateBotDialog() {
 	return (
 		<>
 			<Button onClick={() => createBotDialog.show()} className="button-primary">
-				Nouveau Bot
+				Créer un bot
 			</Button>
 			<Dialog
 				store={createBotDialog}
 				backdrop={<div className="backdrop" />}
 				className="dialog"
 			>
-				<DialogHeading className="heading">Création de bot</DialogHeading>
+				<DialogHeading className="heading">Création d'un bot</DialogHeading>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<div>
 						<label
@@ -54,26 +53,6 @@ export function CreateBotDialog() {
 						/>
 						{errors.username && (
 							<p className="input-error">{errors.username}</p>
-						)}
-					</div>
-
-					<div>
-						<label
-							htmlFor="gameVersion"
-							className="block text-sm font-medium text-slate-500 dark:text-slate-500 mb-2"
-						>
-							Version Minecraft
-						</label>
-						<input
-							id="gameVersion"
-							type="text"
-							value={data.gameVersion}
-							onChange={(e) => setData('gameVersion', e.target.value)}
-							className="input"
-							placeholder="1.21.1"
-						/>
-						{errors.gameVersion && (
-							<p className="input-error">{errors.gameVersion}</p>
 						)}
 					</div>
 

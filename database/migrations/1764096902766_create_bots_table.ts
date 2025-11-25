@@ -1,3 +1,4 @@
+import { defaultTableFields } from '#database/default_table_fields';
 import { BaseSchema } from '@adonisjs/lucid/schema';
 
 export default class extends BaseSchema {
@@ -5,7 +6,6 @@ export default class extends BaseSchema {
 
 	async up() {
 		this.schema.createTable(this.tableName, (table) => {
-			table.increments('id');
 			table
 				.integer('user_id')
 				.unsigned()
@@ -14,10 +14,7 @@ export default class extends BaseSchema {
 				.onDelete('CASCADE')
 				.notNullable();
 			table.string('username').notNullable();
-			table.string('password').nullable();
-			table.string('game_version').notNullable();
-			table.timestamp('created_at');
-			table.timestamp('updated_at');
+			defaultTableFields(table);
 		});
 	}
 

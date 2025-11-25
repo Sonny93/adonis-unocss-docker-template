@@ -6,6 +6,8 @@ import type { WorkerOutgoingMessage } from '../app/bot/types.js';
 const AuthController = () => import('#controllers/auth_controller');
 const HomeController = () => import('#controllers/home_controller');
 const BotsController = () => import('#controllers/bots_controller');
+const MinecraftServersController = () =>
+	import('#controllers/minecraft_servers_controller');
 
 router
 	.group(() => {
@@ -18,12 +20,16 @@ router
 
 router
 	.group(() => {
-		router.get('/', [HomeController, 'index']);
+		router.get('/', [HomeController, 'index']).as('home');
 		router.get('/logout', [AuthController, 'logout']);
 
 		router.post('/bots', [BotsController, 'create']);
 		router.put('/bots/:id', [BotsController, 'update']);
 		router.delete('/bots/:id', [BotsController, 'destroy']);
+
+		router.post('/servers', [MinecraftServersController, 'create']);
+		router.put('/servers/:id', [MinecraftServersController, 'update']);
+		router.delete('/servers/:id', [MinecraftServersController, 'destroy']);
 	})
 	.use(middleware.auth());
 

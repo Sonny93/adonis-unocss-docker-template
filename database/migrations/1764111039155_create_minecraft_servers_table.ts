@@ -2,13 +2,14 @@ import { defaultTableFields } from '#database/default_table_fields';
 import { BaseSchema } from '@adonisjs/lucid/schema';
 
 export default class extends BaseSchema {
-	protected tableName = 'users';
+	protected tableName = 'minecraft_servers';
 
 	async up() {
 		this.schema.createTable(this.tableName, (table) => {
-			table.string('minecraft_username', 16).notNullable().unique();
-			table.string('email', 254).notNullable().unique();
-			table.string('password').notNullable();
+			table.string('name').notNullable();
+			table.string('host').notNullable();
+			table.integer('port').notNullable();
+			table.string('version').notNullable();
 
 			defaultTableFields(table);
 		});

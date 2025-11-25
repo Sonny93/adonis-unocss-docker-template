@@ -4,13 +4,10 @@ import logger from '@adonisjs/core/services/logger';
 interface CreateBotPayload {
 	userId: number;
 	username: string;
-	password?: string;
-	gameVersion: string;
 }
 
 interface UpdateBotPayload {
 	username: string;
-	gameVersion: string;
 }
 
 export class BotService {
@@ -18,8 +15,6 @@ export class BotService {
 		const bot = await Bot.create({
 			userId: payload.userId,
 			username: payload.username,
-			password: payload.password ?? null,
-			gameVersion: payload.gameVersion,
 		});
 
 		logger.info({ botId: bot.id, username: bot.username }, 'Bot created');
@@ -50,9 +45,7 @@ export class BotService {
 		logger.info({ botId: bot.id }, 'Bot destroyed');
 	}
 
-	async list(userId: number): Promise<Bot[]> {
-		return Bot.query().where('userId', userId);
+	async getAll(userId: number): Promise<Bot[]> {
+		return Bot.query().where('userId', userId).orderBy('id', 'asc');
 	}
 }
-
-export const botService = new BotService();

@@ -10,12 +10,6 @@ export default class Bot extends AppBaseModel {
 	@column()
 	declare username: string;
 
-	@column()
-	declare password: string | null;
-
-	@column()
-	declare gameVersion: string;
-
 	@belongsTo(() => User)
 	declare user: BelongsTo<typeof User>;
 }

@@ -1,3 +1,4 @@
+import { Bot } from '#shared/types/index';
 import {
 	Button,
 	Dialog,
@@ -9,11 +10,7 @@ import { useForm } from '@inertiajs/react';
 import { useEffect } from 'react';
 
 interface EditBotDialogProps {
-	bot: {
-		id: number;
-		username: string;
-		gameVersion: string;
-	};
+	bot: Pick<Bot, 'id' | 'username'>;
 }
 
 export function EditBotDialog({ bot }: EditBotDialogProps) {
@@ -21,13 +18,11 @@ export function EditBotDialog({ bot }: EditBotDialogProps) {
 
 	const { data, setData, put, processing, errors, reset } = useForm({
 		username: '',
-		gameVersion: '',
 	});
 
 	useEffect(() => {
 		setData({
 			username: bot.username,
-			gameVersion: bot.gameVersion,
 		});
 	}, [bot]);
 
@@ -44,14 +39,14 @@ export function EditBotDialog({ bot }: EditBotDialogProps) {
 	return (
 		<>
 			<Button onClick={() => editBotDialog.show()} className="button-secondary">
-				Modifier
+				Modifier le bot
 			</Button>
 			<Dialog
 				store={editBotDialog}
 				backdrop={<div className="backdrop" />}
 				className="dialog"
 			>
-				<DialogHeading className="heading">Configurer le bot</DialogHeading>
+				<DialogHeading className="heading">Modification d'un bot</DialogHeading>
 				<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 					<div>
 						<label
@@ -72,25 +67,6 @@ export function EditBotDialog({ bot }: EditBotDialogProps) {
 							<p className="input-error">{errors.username}</p>
 						)}
 					</div>
-					<div>
-						<label
-							htmlFor="gameVersion"
-							className="block text-sm font-medium text-slate-500 dark:text-slate-500 mb-2"
-						>
-							Version Minecraft
-						</label>
-						<input
-							id="gameVersion"
-							type="text"
-							value={data.gameVersion}
-							onChange={(e) => setData('gameVersion', e.target.value)}
-							className="input"
-							placeholder="1.21.1"
-						/>
-						{errors.gameVersion && (
-							<p className="input-error">{errors.gameVersion}</p>
-						)}
-					</div>
 					<div className="flex gap-3 pt-2">
 						<DialogDismiss
 							type="button"
@@ -107,7 +83,7 @@ export function EditBotDialog({ bot }: EditBotDialogProps) {
 							disabled={processing}
 							className="button-primary"
 						>
-							{processing ? 'Configuration...' : 'Configurer'}
+							{processing ? 'Modification...' : 'Modifier'}
 						</DialogDismiss>
 					</div>
 				</form>

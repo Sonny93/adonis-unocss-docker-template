@@ -75,6 +75,7 @@
 		"@vinejs/vine": "^4.1.0",
 		"adonisjs-websocket": "^0.2.3",
 		"edge.js": "^6.3.0",
+		"knex": "^3.1.0",
 		"luxon": "^3.7.2",
 		"mineflayer": "^4.33.0",
 		"pg": "^8.16.3",
