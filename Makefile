@@ -23,3 +23,10 @@ down:
 
 release:
 	@npx release-it
+
+mc-start:
+	@docker run -d --name minecraft-server -p 25565:25565 --env-file minecraft-server.env itzg/minecraft-server
+
+mc-stop:
+	@-docker stop minecraft-server
+	@-docker rm minecraft-server
