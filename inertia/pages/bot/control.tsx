@@ -83,22 +83,22 @@ export default function BotControl({ bot, servers, instance }: Props) {
 		switch (event.type) {
 			case 'spawned':
 				setState((s) => ({ ...s, status: 'running' }));
-				addSystemMessage('Bot connecté au serveur');
+				addSystemMessage('Spawned');
 				break;
 			case 'stopped':
 				setState((s) => ({ ...s, status: 'offline', position: null }));
-				addSystemMessage('Bot déconnecté');
+				addSystemMessage('Disconnected');
 				break;
 			case 'kicked':
 				setState((s) => ({ ...s, status: 'offline', position: null }));
 				addSystemMessage(`Kick: ${event.reason}`);
 				break;
 			case 'death':
-				addSystemMessage('Le bot est mort');
+				addSystemMessage('Dead');
 				break;
 			case 'error':
 				setState((s) => ({ ...s, status: 'error' }));
-				addSystemMessage(`Erreur: ${event.message}`);
+				addSystemMessage(`Error: ${event.message}`);
 				break;
 			case 'health':
 				setState((s) => ({ ...s, health: event.health, food: event.food }));

@@ -23,6 +23,7 @@ function startBot(config: BotConfig) {
 		port: config.port,
 		username: config.username,
 		version: config.version,
+		auth: 'microsoft',
 	});
 
 	bot.loadPlugin(pathfinder);
@@ -58,6 +59,7 @@ function startBot(config: BotConfig) {
 	});
 
 	bot.on('error', (err) => {
+		console.log('error', JSON.stringify(err, null, 2));
 		send({ type: 'error', message: err.message });
 	});
 

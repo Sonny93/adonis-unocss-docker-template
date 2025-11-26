@@ -5,7 +5,7 @@ import { withAuth } from '~/hooks/use_auth';
 
 export const Navbar = withAuth(({ auth }: { auth: UserAuth }) =>
 	auth.isAuthenticated ? (
-		<header className="border-b border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-800 rounded-xl mb-4">
+		<header className="border-b border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-800 rounded-xl mb-6">
 			<div className="px-6 py-4 flex items-center justify-between">
 				<div className="flex items-center gap-4">
 					{auth.user!.minecraftUsername && (
