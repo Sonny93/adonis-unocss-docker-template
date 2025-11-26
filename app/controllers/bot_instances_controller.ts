@@ -90,4 +90,39 @@ export default class BotInstancesController {
 		botManager.goto(String(bot.id), Number(x), Number(y), Number(z));
 		return response.redirect().back();
 	}
+
+	async collectWood({ auth, params, request, response }: HttpContext) {
+		const user = auth.getUserOrFail();
+		const botId = Number(params.botId);
+		const amount = Number(request.input('amount', 10));
+
+		const bot = await Bot.query()
+			.where('id', botId)
+			.where('userId', user.id)
+			.firstOrFail();
+
+		if (!botManager.isRunning(String(bot.id))) {
+			throw new Error('Bot is not running');
+		}
+
+		botManager.collectWood(String(bot.id), amount);
+		return response.redirect().back();
+	}
+
+	async cancelJob({ auth, params, response }: HttpContext) {
+		const user = auth.getUserOrFail();
+		const botId = Number(params.botId);
+
+		const bot = await Bot.query()
+			.where('id', botId)
+			.where('userId', user.id)
+			.firstOrFail();
+
+		if (!botManager.isRunning(String(bot.id))) {
+			throw new Error('Bot is not running');
+		}
+
+		botManager.cancelJob(String(bot.id));
+		return response.redirect().back();
+	}
 }

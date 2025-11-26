@@ -9,6 +9,7 @@ import {
 import { Head, Link, router } from '@inertiajs/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MinecraftAvatar } from '~/components/common/minecraft_avatar';
+import type { Job } from '../../../app/bot/jobs/types.js';
 import type { WorkerOutgoingMessage } from '../../../app/bot/types.js';
 
 interface Props {
@@ -29,6 +30,7 @@ interface BotState {
 	health: number;
 	food: number;
 	position: { x: number; y: number; z: number } | null;
+	currentJob: Job | null;
 }
 
 export default function BotControl({ bot, servers, instance }: Props) {
@@ -37,7 +39,9 @@ export default function BotControl({ bot, servers, instance }: Props) {
 		health: 20,
 		food: 20,
 		position: null,
+		currentJob: null,
 	});
+	const [woodAmount, setWoodAmount] = useState(10);
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
 	const [chatInput, setChatInput] = useState('');
 	const [gotoCoords, setGotoCoords] = useState({ x: '', y: '', z: '' });
@@ -120,6 +124,24 @@ export default function BotControl({ bot, servers, instance }: Props) {
 					},
 				]);
 				break;
+			case 'job:update':
+				setState((s) => ({
+					...s,
+					currentJob:
+						event.job.status === 'completed' ||
+						event.job.status === 'cancelled' ||
+						event.job.status === 'failed'
+							? null
+							: event.job,
+				}));
+				if (event.job.status === 'completed') {
+					addSystemMessage(`Job terminé: ${event.job.type}`);
+				} else if (event.job.status === 'failed') {
+					addSystemMessage(
+						`Job échoué: ${event.job.error || 'Erreur inconnue'}`
+					);
+				}
+				break;
 		}
 	}, []);
 
@@ -177,6 +199,16 @@ export default function BotControl({ bot, servers, instance }: Props) {
 		if (!x || !y || !z) return;
 		postAction('goto', { x: Number(x), y: Number(y), z: Number(z) });
 		addSystemMessage(`Téléportation vers ${x}, ${y}, ${z}`);
+	};
+
+	const handleCollectWood = () => {
+		postAction('jobs/collect-wood', { amount: woodAmount });
+		addSystemMessage(`Job lancé: collecter ${woodAmount} bois`);
+	};
+
+	const handleCancelJob = () => {
+		postAction('jobs/cancel');
+		addSystemMessage('Annulation du job en cours');
 	};
 
 	const isRunning = state.status === 'running';
@@ -383,6 +415,81 @@ export default function BotControl({ bot, servers, instance }: Props) {
 									Téléporter
 								</Button>
 							</form>
+						</div>
+					)}
+
+					{/* Jobs Panel */}
+					{isRunning && (
+						<div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700">
+							<h2 className="text-lg font-semibold text-black dark:text-white mb-4">
+								Jobs
+							</h2>
+
+							{state.currentJob && (
+								<div className="mb-4 p-3 bg-slate-700 rounded-lg">
+									<div className="flex justify-between items-center mb-2">
+										<span className="text-sm text-slate-300">
+											{state.currentJob.type === 'collect_wood'
+												? 'Collecte de bois'
+												: state.currentJob.type}
+										</span>
+										<span className="text-xs px-2 py-1 rounded bg-amber-500 text-white">
+											{state.currentJob.status}
+										</span>
+									</div>
+									{state.currentJob.type === 'collect_wood' && (
+										<div className="mb-2">
+											<div className="flex justify-between text-xs text-slate-400 mb-1">
+												<span>Progression</span>
+												<span>
+													{state.currentJob.params.collected}/
+													{state.currentJob.params.amount}
+												</span>
+											</div>
+											<div className="h-2 bg-slate-600 rounded-full overflow-hidden">
+												<div
+													className="h-full bg-emerald-500 transition-all duration-300"
+													style={{
+														width: `${(state.currentJob.params.collected / state.currentJob.params.amount) * 100}%`,
+													}}
+												/>
+											</div>
+										</div>
+									)}
+									<Button
+										onClick={handleCancelJob}
+										className="w-full mt-2 px-3 py-1.5 text-xs font-medium rounded bg-red-600 hover:bg-red-500 text-white cursor-pointer"
+									>
+										Annuler
+									</Button>
+								</div>
+							)}
+
+							<div className="space-y-3">
+								<div>
+									<label className="block text-sm text-slate-400 mb-1">
+										Collecter du bois
+									</label>
+									<div className="flex gap-2">
+										<input
+											type="number"
+											min="1"
+											max="64"
+											value={woodAmount}
+											onChange={(e) => setWoodAmount(Number(e.target.value))}
+											className="input w-20 text-center"
+											disabled={!!state.currentJob}
+										/>
+										<Button
+											onClick={handleCollectWood}
+											disabled={!!state.currentJob}
+											className="button-primary flex-1"
+										>
+											Collecter
+										</Button>
+									</div>
+								</div>
+							</div>
 						</div>
 					)}
 				</div>

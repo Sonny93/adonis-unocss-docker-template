@@ -80,6 +80,18 @@ class BotManager {
 		this.sendToWorker(botId, { type: 'moveToPlayer', x, y, z });
 	}
 
+	collectWood(botId: string, amount: number): void {
+		this.sendToWorker(botId, { type: 'job:collect_wood', amount });
+	}
+
+	cancelJob(botId: string): void {
+		this.sendToWorker(botId, { type: 'job:cancel' });
+	}
+
+	cancelAllJobs(botId: string): void {
+		this.sendToWorker(botId, { type: 'job:cancel_all' });
+	}
+
 	deleteInstance(botId: string): void {
 		this.workers.delete(botId);
 		this.instances.delete(botId);

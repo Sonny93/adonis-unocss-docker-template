@@ -42,6 +42,14 @@ router
 		router.post('/bot-instances/:botId/stop', [BotInstancesController, 'stop']);
 		router.post('/bot-instances/:botId/chat', [BotInstancesController, 'chat']);
 		router.post('/bot-instances/:botId/goto', [BotInstancesController, 'goto']);
+		router.post('/bot-instances/:botId/jobs/collect-wood', [
+			BotInstancesController,
+			'collectWood',
+		]);
+		router.post('/bot-instances/:botId/jobs/cancel', [
+			BotInstancesController,
+			'cancelJob',
+		]);
 
 		router.post('/servers', [MinecraftServersController, 'create']);
 		router.put('/servers/:id', [MinecraftServersController, 'update']);

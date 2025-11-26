@@ -13,7 +13,12 @@ export type WorkerIncomingMessage =
 	| { type: 'goto'; x: number; y: number; z: number }
 	| { type: 'moveToPlayer'; x: number; y: number; z: number }
 	| { type: 'follow'; playerName: string }
-	| { type: 'stopFollow' };
+	| { type: 'stopFollow' }
+	| { type: 'job:collect_wood'; amount: number }
+	| { type: 'job:cancel' }
+	| { type: 'job:cancel_all' };
+
+import type { Job } from './jobs/types.js';
 
 export type WorkerOutgoingMessage =
 	| { type: 'spawned' }
@@ -23,7 +28,8 @@ export type WorkerOutgoingMessage =
 	| { type: 'chat'; username: string; message: string }
 	| { type: 'health'; health: number; food: number }
 	| { type: 'position'; x: number; y: number; z: number }
-	| { type: 'stopped' };
+	| { type: 'stopped' }
+	| { type: 'job:update'; job: Job };
 
 export interface BotInstanceInfo {
 	botId: string;
