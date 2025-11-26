@@ -10,10 +10,48 @@ import type {
 
 type EventCallback = (botId: string, event: WorkerOutgoingMessage) => void;
 
+const PORT_BASE = 4000;
+
+class PortAllocator {
+	private usedPorts = new Set<number>();
+
+	allocate(): number {
+		let port = PORT_BASE;
+		while (this.usedPorts.has(port)) {
+			port++;
+		}
+		this.usedPorts.add(port);
+		return port;
+	}
+
+	release(port: number): void {
+		this.usedPorts.delete(port);
+	}
+}
+
+const portAllocator = new PortAllocator();
+
 class BotManager {
 	private workers = new Map<string, Worker>();
 	private instances = new Map<string, BotInstanceInfo>();
 	private eventCallbacks: EventCallback[] = [];
+	private botPorts = new Map<string, number[]>();
+
+	allocatePort(botId: string): number {
+		const port = portAllocator.allocate();
+		const ports = this.botPorts.get(botId) ?? [];
+		ports.push(port);
+		this.botPorts.set(botId, ports);
+		return port;
+	}
+
+	private releaseAllPorts(botId: string): void {
+		const ports = this.botPorts.get(botId) ?? [];
+		for (const port of ports) {
+			portAllocator.release(port);
+		}
+		this.botPorts.delete(botId);
+	}
 
 	private getWorkerPath(): string {
 		const currentFile = fileURLToPath(import.meta.url);
@@ -21,10 +59,14 @@ class BotManager {
 		return join(currentDir, 'bot_worker.js');
 	}
 
-	start(config: BotConfig): BotInstanceInfo {
+	start(config: Omit<BotConfig, 'inventoryPort'>): BotInstanceInfo {
 		if (this.workers.has(config.botId)) {
 			throw new Error(`Bot ${config.botId} is already running`);
 		}
+
+		const inventoryPort = this.allocatePort(config.botId);
+		console.log('inventoryPort', inventoryPort);
+		const fullConfig: BotConfig = { ...config, inventoryPort };
 
 		const worker = new Worker(this.getWorkerPath());
 		this.workers.set(config.botId, worker);
@@ -34,6 +76,7 @@ class BotManager {
 			username: config.username,
 			host: config.host,
 			port: config.port,
+			inventoryPort,
 			status: 'starting',
 		};
 		this.instances.set(config.botId, instanceInfo);
@@ -43,6 +86,7 @@ class BotManager {
 		});
 
 		worker.on('error', (err) => {
+			console.error(err);
 			this.updateStatus(config.botId, 'error');
 			this.emit(config.botId, { type: 'error', message: err.message });
 		});
@@ -50,9 +94,10 @@ class BotManager {
 		worker.on('exit', () => {
 			this.workers.delete(config.botId);
 			this.updateStatus(config.botId, 'stopped');
+			this.releaseAllPorts(config.botId);
 		});
 
-		this.sendToWorker(config.botId, { type: 'start', config });
+		this.sendToWorker(config.botId, { type: 'start', config: fullConfig });
 
 		return instanceInfo;
 	}

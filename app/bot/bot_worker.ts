@@ -1,5 +1,7 @@
 import mineflayer from 'mineflayer';
+import armorManager from 'mineflayer-armor-manager';
 import pathfinderPkg from 'mineflayer-pathfinder';
+import inventoryManager from 'mineflayer-web-inventory';
 import { parentPort } from 'node:worker_threads';
 import { JobExecutor, JobQueue } from './jobs/index.js';
 import type { CollectWoodJob, Job } from './jobs/types.js';
@@ -17,14 +19,6 @@ let positionInterval: ReturnType<typeof setInterval> | null = null;
 let jobQueue: JobQueue | null = null;
 let jobExecutor: JobExecutor | null = null;
 
-function send(message: WorkerOutgoingMessage) {
-	parentPort?.postMessage(message);
-}
-
-function onJobUpdate(job: Job) {
-	send({ type: 'job:update', job });
-}
-
 function startBot(config: BotConfig) {
 	bot = mineflayer.createBot({
 		host: config.host,
@@ -34,10 +28,7 @@ function startBot(config: BotConfig) {
 		auth: 'microsoft',
 	});
 
-	bot.loadPlugin(pathfinder);
-
-	jobQueue = new JobQueue(onJobUpdate);
-	jobExecutor = new JobExecutor(bot, { Movements, GoalBlock }, onJobUpdate);
+	bot.once('spawn', () => initAfterSpawn(config));
 
 	bot.on('spawn', () => {
 		send({ type: 'spawned' });
@@ -100,6 +91,26 @@ function cleanup() {
 	jobQueue = null;
 	jobExecutor = null;
 	bot = null;
+}
+
+function initAfterSpawn(config: BotConfig) {
+	if (!bot) return;
+	bot.loadPlugin(pathfinder);
+	bot.loadPlugin(armorManager);
+	inventoryManager(bot, {
+		port: config.inventoryPort,
+	});
+
+	jobQueue = new JobQueue(onJobUpdate);
+	jobExecutor = new JobExecutor(bot, { Movements, GoalBlock }, onJobUpdate);
+}
+
+function send(message: WorkerOutgoingMessage) {
+	parentPort?.postMessage(message);
+}
+
+function onJobUpdate(job: Job) {
+	send({ type: 'job:update', job });
 }
 
 function handleChat(message: string) {

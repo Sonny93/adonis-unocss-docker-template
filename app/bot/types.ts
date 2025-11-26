@@ -4,6 +4,7 @@ export interface BotConfig {
 	host: string;
 	port: number;
 	version: string;
+	inventoryPort: number;
 }
 
 export type WorkerIncomingMessage =
@@ -35,5 +36,6 @@ export interface BotInstanceInfo {
 	username: string;
 	host: string;
 	port: number;
+	inventoryPort: number;
 	status: 'starting' | 'running' | 'stopping' | 'stopped' | 'error';
 }

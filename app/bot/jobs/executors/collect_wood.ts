@@ -28,6 +28,9 @@ export async function executeCollectWood(
 
 	while (collected < amount) {
 		if (signal.aborted) {
+			console.log(
+				`Collect wood job cancelled. Collected ${collected}/${amount}`
+			);
 			return { success: false, message: 'Job cancelled' };
 		}
 
