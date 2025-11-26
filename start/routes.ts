@@ -12,6 +12,7 @@ const BotInstancesController = () =>
 	import('#controllers/bot_instances_controller');
 const MinecraftServersController = () =>
 	import('#controllers/minecraft_servers_controller');
+const ApiTokensController = () => import('#controllers/api_tokens_controller');
 
 router
 	.group(() => {
@@ -45,10 +46,22 @@ router
 		router.post('/servers', [MinecraftServersController, 'create']);
 		router.put('/servers/:id', [MinecraftServersController, 'update']);
 		router.delete('/servers/:id', [MinecraftServersController, 'destroy']);
+
+		router.get('/api-tokens', [ApiTokensController, 'index']);
+		router.post('/api-tokens', [ApiTokensController, 'store']);
+		router.delete('/api-tokens/:id', [ApiTokensController, 'destroy']);
 	})
 	.use(middleware.auth());
 
-const wsClients = new Map<string, { send: (data: string) => void }>();
+import type { WsClientType } from '#middleware/ws_auth_middleware';
+
+interface WsClient {
+	send: (data: string) => void;
+	type: WsClientType;
+	userId: number;
+}
+
+const wsClients = new Map<string, WsClient>();
 
 botManager.onEvent((botId: string, event: WorkerOutgoingMessage) => {
 	const payload = JSON.stringify({ botId, event });
@@ -57,8 +70,17 @@ botManager.onEvent((botId: string, event: WorkerOutgoingMessage) => {
 	}
 });
 
-router.ws('/ws', ({ ws }) => {
-	wsClients.set(ws.id, ws);
+router.ws('/ws', ({ ws, auth, wsClientType }) => {
+	const user = auth.user!;
+	wsClients.set(ws.id, {
+		send: (data) => ws.send(data),
+		type: wsClientType!,
+		userId: user.id,
+	});
+
+	ws.on('message', (message) => {
+		console.log(`[${wsClientType}] ${message.toString()}`);
+	});
 
 	ws.on('close', () => {
 		wsClients.delete(ws.id);

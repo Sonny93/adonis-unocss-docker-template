@@ -17,6 +17,11 @@ const inertiaConfig = defineConfig({
 				await ctx.auth?.check();
 				return new UserAuthDto(ctx.auth?.user).serialize();
 			}),
+		flash: (ctx) =>
+			ctx.inertia.always(() => ({
+				...ctx.session?.flashMessages.get('flash'),
+				createdToken: ctx.session?.flashMessages.get('createdToken'),
+			})),
 	},
 
 	/**

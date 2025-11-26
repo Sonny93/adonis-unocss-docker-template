@@ -31,4 +31,3 @@ export interface BotInstanceInfo {
 	port: number;
 	status: 'starting' | 'running' | 'stopping' | 'stopped' | 'error';
 }
-

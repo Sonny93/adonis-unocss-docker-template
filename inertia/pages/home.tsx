@@ -1,5 +1,7 @@
 import { Bot, MinecraftServer } from '#shared/types/index';
 import { Head, Link } from '@inertiajs/react';
+import { CreateTokenDialog } from '~/components/api-token/create_token_dialog';
+import { DeleteTokenButton } from '~/components/api-token/delete_token_button';
 import { CreateBotDialog } from '~/components/bot/create_bot_dialog';
 import { EditBotDialog } from '~/components/bot/edit_bot_dialog';
 import { MinecraftAvatar } from '~/components/common/minecraft_avatar';
@@ -7,12 +9,20 @@ import { CreateServerDialog } from '~/components/server/create_server_dialog';
 import { DeleteServerButton } from '~/components/server/delete_server_button';
 import { EditServerDialog } from '~/components/server/edit_server_dialog';
 
+interface ApiToken {
+	id: string;
+	name: string;
+	lastUsedAt: string | null;
+	createdAt: string | null;
+}
+
 interface Props {
 	bots: Bot[];
 	servers: MinecraftServer[];
+	apiTokens: ApiToken[];
 }
 
-const Home = ({ bots, servers }: Props) => (
+const Home = ({ bots, servers, apiTokens }: Props) => (
 	<>
 		<Head title="Dashboard" />
 
@@ -43,10 +53,7 @@ const Home = ({ bots, servers }: Props) => (
 							</div>
 						</div>
 						<div className="mt-4 flex gap-2">
-							<Link
-								href={`/bots/${bot.id}/control`}
-								className="button-primary"
-							>
+							<Link href={`/bots/${bot.id}/control`} className="button-primary">
 								Contrôler
 							</Link>
 							<EditBotDialog bot={bot} />
@@ -86,6 +93,49 @@ const Home = ({ bots, servers }: Props) => (
 						<div className="mt-4 flex gap-2">
 							<EditServerDialog server={server} />
 							<DeleteServerButton serverId={server.id} />
+						</div>
+					</div>
+				))}
+			</div>
+		)}
+
+		<div className="flex items-center justify-between mb-8 mt-12">
+			<h1 className="text-2xl font-bold text-black dark:text-white">
+				Tokens API
+			</h1>
+			<CreateTokenDialog />
+		</div>
+
+		{apiTokens.length === 0 ? (
+			<div className="text-center py-16 bg-white dark:bg-slate-800 rounded-2xl">
+				<p className="text-slate-400">Aucun token API</p>
+			</div>
+		) : (
+			<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{apiTokens.map((token) => (
+					<div
+						key={token.id}
+						className="p-5 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 dark:hover:border-slate-600 hover:border-gray-300 transition"
+					>
+						<div className="flex-1 min-w-0">
+							<h3 className="text-lg font-semibold text-black dark:text-white truncate">
+								{token.name}
+							</h3>
+							<p className="text-sm text-slate-400">
+								Créé le{' '}
+								{token.createdAt
+									? new Date(token.createdAt).toLocaleDateString('fr-FR')
+									: '-'}
+							</p>
+							{token.lastUsedAt && (
+								<p className="text-sm text-slate-500">
+									Dernière utilisation:{' '}
+									{new Date(token.lastUsedAt).toLocaleDateString('fr-FR')}
+								</p>
+							)}
+						</div>
+						<div className="mt-4 flex gap-2">
+							<DeleteTokenButton tokenId={token.id} />
 						</div>
 					</div>
 				))}
