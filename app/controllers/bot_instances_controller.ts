@@ -69,28 +69,6 @@ export default class BotInstancesController {
 		return response.redirect().back();
 	}
 
-	async goto({ auth, params, request, response }: HttpContext) {
-		const user = auth.getUserOrFail();
-		const botId = Number(params.botId);
-		const { x, y, z } = request.only(['x', 'y', 'z']);
-
-		const bot = await Bot.query()
-			.where('id', botId)
-			.where('userId', user.id)
-			.first();
-
-		if (!bot) {
-			throw new Error('Bot not found');
-		}
-
-		if (!botManager.isRunning(String(bot.id))) {
-			throw new Error('Bot is not running');
-		}
-
-		botManager.goto(String(bot.id), Number(x), Number(y), Number(z));
-		return response.redirect().back();
-	}
-
 	async collectWood({ auth, params, request, response }: HttpContext) {
 		const user = auth.getUserOrFail();
 		const botId = Number(params.botId);

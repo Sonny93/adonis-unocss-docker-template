@@ -72,10 +72,6 @@ class BotManager {
 		this.sendToWorker(botId, { type: 'chat', message });
 	}
 
-	goto(botId: string, x: number, y: number, z: number): void {
-		this.sendToWorker(botId, { type: 'goto', x, y, z });
-	}
-
 	moveToPlayer(botId: string, x: number, y: number, z: number): void {
 		this.sendToWorker(botId, { type: 'moveToPlayer', x, y, z });
 	}

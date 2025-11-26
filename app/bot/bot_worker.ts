@@ -106,12 +106,6 @@ function handleChat(message: string) {
 	bot?.chat(message);
 }
 
-function handleGoto(x: number, y: number, z: number) {
-	if (!bot) return;
-	jobQueue?.cancelAll();
-	console.log(`[Bot] Goto requested: ${x}, ${y}, ${z}`);
-}
-
 function handleMoveToPlayer(x: number, y: number, z: number) {
 	if (!bot) return;
 	jobQueue?.cancelAll();
@@ -149,9 +143,6 @@ parentPort?.on('message', (message: WorkerIncomingMessage) => {
 			break;
 		case 'chat':
 			handleChat(message.message);
-			break;
-		case 'goto':
-			handleGoto(message.x, message.y, message.z);
 			break;
 		case 'moveToPlayer':
 			handleMoveToPlayer(message.x, message.y, message.z);

@@ -44,7 +44,6 @@ export default function BotControl({ bot, servers, instance }: Props) {
 	const [woodAmount, setWoodAmount] = useState(10);
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
 	const [chatInput, setChatInput] = useState('');
-	const [gotoCoords, setGotoCoords] = useState({ x: '', y: '', z: '' });
 	const [selectedServerId, setSelectedServerId] = useState<string>(
 		servers[0]?.id.toString() ?? ''
 	);
@@ -191,14 +190,6 @@ export default function BotControl({ bot, servers, instance }: Props) {
 		e.preventDefault();
 		if (!chatInput.trim()) return;
 		postAction('chat', { message: chatInput }, () => setChatInput(''));
-	};
-
-	const handleGoto = (e: React.FormEvent) => {
-		e.preventDefault();
-		const { x, y, z } = gotoCoords;
-		if (!x || !y || !z) return;
-		postAction('goto', { x: Number(x), y: Number(y), z: Number(z) });
-		addSystemMessage(`Téléportation vers ${x}, ${y}, ${z}`);
 	};
 
 	const handleCollectWood = () => {
@@ -372,49 +363,6 @@ export default function BotControl({ bot, servers, instance }: Props) {
 									</p>
 								</div>
 							)}
-						</div>
-					)}
-
-					{/* Goto Form */}
-					{isRunning && (
-						<div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-gray-200 dark:border-slate-700">
-							<h2 className="text-lg font-semibold text-black dark:text-white mb-4">
-								Téléportation
-							</h2>
-							<form onSubmit={handleGoto} className="space-y-3">
-								<div className="grid grid-cols-3 gap-2">
-									<input
-										type="number"
-										placeholder="X"
-										value={gotoCoords.x}
-										onChange={(e) =>
-											setGotoCoords((c) => ({ ...c, x: e.target.value }))
-										}
-										className="input text-center"
-									/>
-									<input
-										type="number"
-										placeholder="Y"
-										value={gotoCoords.y}
-										onChange={(e) =>
-											setGotoCoords((c) => ({ ...c, y: e.target.value }))
-										}
-										className="input text-center"
-									/>
-									<input
-										type="number"
-										placeholder="Z"
-										value={gotoCoords.z}
-										onChange={(e) =>
-											setGotoCoords((c) => ({ ...c, z: e.target.value }))
-										}
-										className="input text-center"
-									/>
-								</div>
-								<Button type="submit" className="button-primary w-full">
-									Téléporter
-								</Button>
-							</form>
 						</div>
 					)}
 

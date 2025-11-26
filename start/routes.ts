@@ -41,7 +41,6 @@ router
 		]);
 		router.post('/bot-instances/:botId/stop', [BotInstancesController, 'stop']);
 		router.post('/bot-instances/:botId/chat', [BotInstancesController, 'chat']);
-		router.post('/bot-instances/:botId/goto', [BotInstancesController, 'goto']);
 		router.post('/bot-instances/:botId/jobs/collect-wood', [
 			BotInstancesController,
 			'collectWood',

@@ -10,7 +10,6 @@ export type WorkerIncomingMessage =
 	| { type: 'start'; config: BotConfig }
 	| { type: 'stop' }
 	| { type: 'chat'; message: string }
-	| { type: 'goto'; x: number; y: number; z: number }
 	| { type: 'moveToPlayer'; x: number; y: number; z: number }
 	| { type: 'follow'; playerName: string }
 	| { type: 'stopFollow' }
