@@ -1,10 +1,14 @@
 import mineflayer from 'mineflayer';
+import pathfinderPkg from 'mineflayer-pathfinder';
 import { parentPort } from 'node:worker_threads';
 import type {
 	BotConfig,
 	WorkerIncomingMessage,
 	WorkerOutgoingMessage,
 } from './types.js';
+
+const { pathfinder, Movements, goals } = pathfinderPkg;
+const { GoalNear } = goals;
 
 let bot: mineflayer.Bot | null = null;
 let positionInterval: ReturnType<typeof setInterval> | null = null;
@@ -21,6 +25,8 @@ function startBot(config: BotConfig) {
 		version: config.version,
 	});
 
+	bot.loadPlugin(pathfinder);
+
 	bot.on('spawn', () => {
 		send({ type: 'spawned' });
 		positionInterval = setInterval(() => {
@@ -32,7 +38,7 @@ function startBot(config: BotConfig) {
 					z: bot.entity.position.z,
 				});
 			}
-		}, 1000);
+		}, 10);
 	});
 
 	bot.on('health', () => {
@@ -89,6 +95,14 @@ function handleGoto(x: number, y: number, z: number) {
 	console.log(`[Bot] Goto requested: ${x}, ${y}, ${z}`);
 }
 
+function handleMoveToPlayer(x: number, y: number, z: number) {
+	if (!bot) return;
+	console.log(`[Bot] MoveToPlayer requested: ${x}, ${y}, ${z}`);
+	const defaultMove = new Movements(bot);
+	bot.pathfinder.setMovements(defaultMove);
+	bot.pathfinder.setGoal(new GoalNear(x, y, z, 1));
+}
+
 parentPort?.on('message', (message: WorkerIncomingMessage) => {
 	switch (message.type) {
 		case 'start':
@@ -102,6 +116,9 @@ parentPort?.on('message', (message: WorkerIncomingMessage) => {
 			break;
 		case 'goto':
 			handleGoto(message.x, message.y, message.z);
+			break;
+		case 'moveToPlayer':
+			handleMoveToPlayer(message.x, message.y, message.z);
 			break;
 	}
 });

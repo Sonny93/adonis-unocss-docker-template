@@ -16,13 +16,14 @@ export default class WsAuthMiddleware {
 
 		const authHeader = request.header('authorization');
 		const isApiRequest = authHeader?.startsWith('Bearer ');
-		logger.info(`[WsAuthMiddleware] isApiRequest: ${isApiRequest}`);
 		if (isApiRequest) {
+			logger.info(`[WsAuthMiddleware] Authenticated with api guard`);
 			await auth.authenticateUsing(['api']);
 			ctx.wsClientType = 'mod';
 		} else {
 			await auth.authenticateUsing(['web']);
 			ctx.wsClientType = 'frontend';
+			logger.info(`[WsAuthMiddleware] Authenticated with web guard`);
 		}
 
 		return next();

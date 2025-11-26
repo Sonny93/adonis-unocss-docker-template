@@ -76,6 +76,10 @@ class BotManager {
 		this.sendToWorker(botId, { type: 'goto', x, y, z });
 	}
 
+	moveToPlayer(botId: string, x: number, y: number, z: number): void {
+		this.sendToWorker(botId, { type: 'moveToPlayer', x, y, z });
+	}
+
 	deleteInstance(botId: string): void {
 		this.workers.delete(botId);
 		this.instances.delete(botId);
@@ -101,6 +105,8 @@ class BotManager {
 		const worker = this.workers.get(botId);
 		if (worker) {
 			worker.postMessage(message);
+		} else {
+			console.log("le worker n'existe pas");
 		}
 	}
 

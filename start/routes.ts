@@ -54,12 +54,19 @@ router
 	.use(middleware.auth());
 
 import type { WsClientType } from '#middleware/ws_auth_middleware';
+import logger from '@adonisjs/core/services/logger';
 
 interface WsClient {
 	send: (data: string) => void;
 	type: WsClientType;
 	userId: number;
 }
+
+type WsIncomingMessage = {
+	type: 'moveToPlayer';
+	botId: string;
+	data: { x: number; y: number; z: number };
+};
 
 const wsClients = new Map<string, WsClient>();
 
@@ -78,8 +85,25 @@ router.ws('/ws', ({ ws, auth, wsClientType }) => {
 		userId: user.id,
 	});
 
-	ws.on('message', (message) => {
-		console.log(`[${wsClientType}] ${message.toString()}`);
+	ws.on('message', (rawMessage) => {
+		logger.debug(`[${wsClientType}] ${rawMessage.toString()}`);
+
+		try {
+			const message: WsIncomingMessage = JSON.parse(rawMessage.toString());
+
+			if (message.type === 'moveToPlayer') {
+				const { botId = '1', data } = message;
+				console.log('route moveToPlayer', botId, message);
+				if (botManager.isRunning(botId)) {
+					console.log('botManager.moveToPlayer');
+					botManager.moveToPlayer(botId, data.x, data.y, data.z);
+				} else {
+					console.log('bot is not running');
+				}
+			}
+		} catch {
+			logger.warn(`Invalid WebSocket message: ${rawMessage.toString()}`);
+		}
 	});
 
 	ws.on('close', () => {
