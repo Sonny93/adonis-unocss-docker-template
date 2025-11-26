@@ -7,3 +7,11 @@ export type UserAuth = ReturnType<UserAuthDto['serialize']>;
 export type Bot = ReturnType<BotDto['serialize']>;
 export type User = ReturnType<UserDto['serialize']>;
 export type MinecraftServer = ReturnType<MinecraftServerDto['serialize']>;
+
+export interface BotInstance {
+	botId: string;
+	username: string;
+	host: string;
+	port: number;
+	status: 'starting' | 'running' | 'stopping' | 'stopped' | 'error';
+}

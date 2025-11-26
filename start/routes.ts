@@ -6,6 +6,10 @@ import type { WorkerOutgoingMessage } from '../app/bot/types.js';
 const AuthController = () => import('#controllers/auth_controller');
 const HomeController = () => import('#controllers/home_controller');
 const BotsController = () => import('#controllers/bots_controller');
+const BotControlController = () =>
+	import('#controllers/bot_control_controller');
+const BotInstancesController = () =>
+	import('#controllers/bot_instances_controller');
 const MinecraftServersController = () =>
 	import('#controllers/minecraft_servers_controller');
 
@@ -26,6 +30,17 @@ router
 		router.post('/bots', [BotsController, 'create']);
 		router.put('/bots/:id', [BotsController, 'update']);
 		router.delete('/bots/:id', [BotsController, 'destroy']);
+		router
+			.get('/bots/:id/control', [BotControlController, 'show'])
+			.as('bot.control');
+
+		router.post('/bot-instances/:botId/start', [
+			BotInstancesController,
+			'start',
+		]);
+		router.post('/bot-instances/:botId/stop', [BotInstancesController, 'stop']);
+		router.post('/bot-instances/:botId/chat', [BotInstancesController, 'chat']);
+		router.post('/bot-instances/:botId/goto', [BotInstancesController, 'goto']);
 
 		router.post('/servers', [MinecraftServersController, 'create']);
 		router.put('/servers/:id', [MinecraftServersController, 'update']);

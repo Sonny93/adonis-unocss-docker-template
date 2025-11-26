@@ -1,6 +1,5 @@
 import { Bot, MinecraftServer } from '#shared/types/index';
-import { Button } from '@ariakit/react';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { CreateBotDialog } from '~/components/bot/create_bot_dialog';
 import { EditBotDialog } from '~/components/bot/edit_bot_dialog';
 import { MinecraftAvatar } from '~/components/common/minecraft_avatar';
@@ -44,9 +43,12 @@ const Home = ({ bots, servers }: Props) => (
 							</div>
 						</div>
 						<div className="mt-4 flex gap-2">
-							<Button className="button-primary" disabled>
-								Démarrer
-							</Button>
+							<Link
+								href={`/bots/${bot.id}/control`}
+								className="button-primary"
+							>
+								Contrôler
+							</Link>
 							<EditBotDialog bot={bot} />
 						</div>
 					</div>
