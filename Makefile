@@ -19,3 +19,6 @@ down:
 
 release:
 	@npx release-it
+
+format:
+	@pnpm run format
