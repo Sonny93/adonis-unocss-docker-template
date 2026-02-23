@@ -4,7 +4,7 @@ import { defineConfig, presetWind4 } from 'unocss';
 export default defineConfig({
 	presets: [
 		presetWind4({
-			dark: 'class', // Active le mode sombre avec la classe 'dark'
+			dark: 'class',
 		}),
 		presetWebFonts({
 			provider: 'bunny',
@@ -13,9 +13,10 @@ export default defineConfig({
 			},
 		}),
 	],
-	theme: {
-		colors: {
-			// Couleurs personnalisées si nécessaire
-		},
+	shortcuts: {
+		'min-h-dvh': 'min-h-[100dvh]',
+		'min-h-svh': 'min-h-[100svh]',
+		'h-dvh': 'h-[100dvh]',
+		'h-svh': 'h-[100svh]',
 	},
 });

@@ -3,8 +3,14 @@
 	padding: 0;
 }
 
+/* Fix nprogress position */
+#nprogress {
+	position: relative;
+	z-index: 9999999;
+}
+
 html,
 body {
-	height: 100%;
+	height: 100dvh;
 	width: 100%;
 }

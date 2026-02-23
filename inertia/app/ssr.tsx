@@ -1,7 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { BaseLayout } from '~/layouts/base_layout';
+import { DefaultLayout } from '~/layouts/default_layout';
 
 export default function render(page: any) {
 	return createInertiaApp({
@@ -13,7 +13,7 @@ export default function render(page: any) {
 			pageComponent.default.layout =
 				pageComponent?.default?.layout ||
 				((pageChildren: React.ReactNode) => (
-					<BaseLayout children={pageChildren} />
+					<DefaultLayout>{pageChildren}</DefaultLayout>
 				));
 			return pageComponent;
 		},

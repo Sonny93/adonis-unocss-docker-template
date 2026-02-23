@@ -37,6 +37,9 @@ importers:
       '@inertiajs/react':
         specifier: ^2.3.15
         version: 2.3.15(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@minimalstuff/ui':
+        specifier: ^1.1.6
+        version: 1.1.6(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@vinejs/vine':
         specifier: ^4.3.0
         version: 4.3.0
@@ -1300,6 +1303,15 @@ packages:
       {
         integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==,
       }
+
+  '@minimalstuff/ui@1.1.6':
+    resolution:
+      {
+        integrity: sha512-8vZGBwM6MLACqQYlf0v5buE4ckb204vs5kg5eQr3LXshajJMWkQFK8AqkFwb+odWRNYgmRQWHslr8S1M38fcfw==,
+      }
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@noble/hashes@1.8.0':
     resolution:
@@ -2847,6 +2859,13 @@ packages:
         integrity: sha512-ouuZd4/dm2Sw5Gmqy6bGyNNNe1qt9RpmxveLSO7KcgsTnU7RXfsw+/bukWGo1abgBiMAic068rclZsO4IWmmxQ==,
       }
     engines: { node: '>= 12' }
+
+  clsx@2.1.1:
+    resolution:
+      {
+        integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==,
+      }
+    engines: { node: '>=6' }
 
   code-block-writer@13.0.3:
     resolution:
@@ -6439,6 +6458,27 @@ packages:
         integrity: sha512-VqcHA/HqOxaBMjBQCYz1h8jYdAAeLm6cVLmefijJjMY4aovOfKkqMry7amNX3JiN4hXArb7ZVYBNpjEVkV3r/A==,
       }
 
+  zustand@5.0.11:
+    resolution:
+      {
+        integrity: sha512-fdZY+dk7zn/vbWNCYmzZULHRrss0jx5pPFiOuMZ/5HJN6Yv3u+1Wswy/4MpZEkEGhtNH+pwxZB8OKgUBPzYAGg==,
+      }
+    engines: { node: '>=12.20.0' }
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
+
 snapshots:
   '@adonisjs/ace@13.4.0':
     dependencies:
@@ -7258,6 +7298,17 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@minimalstuff/ui@1.1.6(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      clsx: 2.1.1
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+      zustand: 5.0.11(@types/react@19.2.14)(react@19.2.4)
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - use-sync-external-store
 
   '@noble/hashes@1.8.0': {}
 
@@ -8169,6 +8220,8 @@ snapshots:
       string-width: 8.2.0
 
   cli-width@4.1.0: {}
+
+  clsx@2.1.1: {}
 
   code-block-writer@13.0.3: {}
 
@@ -10165,3 +10218,8 @@ snapshots:
       '@speed-highlight/core': 1.2.14
       cookie-es: 2.0.0
       youch-core: 0.3.3
+
+  zustand@5.0.11(@types/react@19.2.14)(react@19.2.4):
+    optionalDependencies:
+      '@types/react': 19.2.14
+      react: 19.2.4

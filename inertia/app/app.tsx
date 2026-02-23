@@ -5,10 +5,10 @@ import { PROJECT_NAME } from '#config/project';
 import { resolvePageComponent } from '@adonisjs/inertia/helpers';
 import { createInertiaApp } from '@inertiajs/react';
 import { hydrateRoot } from 'react-dom/client';
-import { BaseLayout } from '~/layouts/base_layout';
+import { DefaultLayout } from '~/layouts/default_layout';
 
 createInertiaApp({
-	progress: { color: '#5468FF', delay: 100 },
+	progress: { color: 'var(--colors-blue-500)', delay: 50 },
 
 	title: (title) => (title && `${title} — `) + PROJECT_NAME,
 
@@ -19,7 +19,8 @@ createInertiaApp({
 		);
 
 		currentPage.default.layout =
-			currentPage.default.layout || ((p: any) => <BaseLayout children={p} />);
+			currentPage.default.layout ||
+			((p: React.ReactNode) => <DefaultLayout>{p}</DefaultLayout>);
 
 		return currentPage;
 	},
