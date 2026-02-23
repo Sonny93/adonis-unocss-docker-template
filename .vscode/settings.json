@@ -9,5 +9,9 @@
 		"*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
 		"package.json": "pnpm-lock.yaml, pnpm-workspace.yaml, tsconfig.json, eslint.config.js, .babelrc, vite.config.ts, .editorconfig, .prettierignore",
 		"Justfile": "*compose.yml, Dockerfile, .dockerignore"
+	},
+	"sonarlint.connectedMode.project": {
+		"connectionId": "sonny93",
+		"projectKey": "Sonny93_adonis-unocss-docker-template"
 	}
 }
