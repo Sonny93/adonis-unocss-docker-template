@@ -1,6 +1,7 @@
-import { resolvePageComponent } from '@adonisjs/inertia/helpers';
-import { createInertiaApp } from '@inertiajs/react';
 import { hydrateRoot } from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from '@adonisjs/inertia/helpers';
+
 import { DefaultLayout } from '~/layouts/default_layout';
 
 const PROJECT_NAME = 'App';
