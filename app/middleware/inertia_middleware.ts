@@ -4,7 +4,7 @@ import BaseInertiaMiddleware from '@adonisjs/inertia/inertia_middleware';
 
 export default class InertiaMiddleware extends BaseInertiaMiddleware {
 	share(ctx: HttpContext) {
-		const { session, auth } = ctx as Partial<HttpContext>;
+		const { session, auth } = ctx;
 
 		return {
 			errors: ctx.inertia.always(this.getValidationErrors(ctx)),

@@ -20,7 +20,11 @@ export default class GuestMiddleware {
 		next: NextFn,
 		options: { guards?: (keyof Authenticators)[] } = {}
 	) {
-		for (let guard of options.guards || [ctx.auth.defaultGuard]) {
+		const guards = (options.guards ?? [ctx.auth.defaultGuard]) as Array<
+			keyof Authenticators
+		>;
+
+		for (let guard of guards) {
 			if (await ctx.auth.use(guard).check()) {
 				return ctx.response.redirect(this.redirectTo, true);
 			}
