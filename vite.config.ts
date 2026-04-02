@@ -9,7 +9,7 @@ export default defineConfig({
 		inertia({ ssr: { enabled: true, entrypoint: 'inertia/ssr.tsx' } }),
 		react(),
 		adonisjs({
-			entrypoints: ['inertia/app/app.tsx'],
+			entrypoints: ['inertia/app.tsx'],
 			reload: ['resources/views/**/*.edge'],
 		}),
 		UnoCSS(),
