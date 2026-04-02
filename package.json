@@ -95,7 +95,7 @@
 		"printWidth": 80
 	},
 	"volta": {
-		"node": "24.13.1"
+		"node": "24.14.1"
 	},
 	"pnpm": {
 		"overrides": {
