@@ -69,6 +69,7 @@
 		"@adonisjs/vite": "^5.1.0",
 		"@inertiajs/react": "^2.3.18",
 		"@minimalstuff/ui": "^1.2.1",
+		"@tuyau/core": "^1.2.2",
 		"@vinejs/vine": "^4.3.0",
 		"edge.js": "^6.5.0",
 		"luxon": "^3.7.2",

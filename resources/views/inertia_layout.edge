@@ -7,11 +7,6 @@
 
   <title inertia>App</title>
 
-  @stack('dumper')
-  @viteReactRefresh()
-  @inertiaHead()
-  @vite(['inertia/app/app.tsx', `inertia/pages/${page.component}.tsx`])
-
   <script>
     (function() {
       const savedTheme = localStorage.getItem('theme');
@@ -36,6 +31,11 @@
       }
     })();
   </script>
+
+  @stack('dumper')
+  @viteReactRefresh()
+  @inertiaHead()
+  @vite(['inertia/app.tsx', `inertia/pages/${page.component}.tsx`])
 </head>
 
 <body>
